@@ -1,61 +1,49 @@
-//Add Types to a Function
-//Original JavaScript
-// function fullName(first, last) {
-//   return first + " " + last;
-// }
+//1. Define and Use an Interface
 
-// TypeScript Version
-function fullName(first: string, last: string): string {
-  return first + " " + last;
-}
-const name = fullName("nuur", "maxamud");
-console.log(name);
-
-//2. Optional and Default Parameters
-function registerUser(
-  username: string,
-  isAdmin?: boolean
-): void {
-  console.log("Username:", username);
-  console.log("Admin:", isAdmin);
+interface User {
+  username: string;
+  password: string;
 }
 
-registerUser("Nuur");
-
-
-//Your requested function:
-function registerUser(
-  username: string,
-  isAdmin: boolean = false,
-  language: string = "en"
-): void {
-
-  console.log("Username:", username);
-  console.log("Admin:", isAdmin);
-  console.log("Language:", language);
-
+function logins(user: User): void {
+  console.log("Username:", user.username);
+  console.log("Password:", user.password);
 }
 
-registerUser("Nuur");
-registerUser("Ahmed", true);
-registerUser("Ali", false, "so");
+const user12: User = {
+  username: "cali",
+  password: "654321"
+};
+
+logins(user12);
 
 
-
-//3. Create a Safe Rest Function
-
-function average(...scores: number[]): number {
-
-  if (scores.length === 0) {
-    return 0;
-  }
-
-  const total = scores.reduce((sum, score) => sum + score, 0);
-
-  return total / scores.length;
-
+//2. Use Optional Properties
+interface User {
+  username: string;
+  password: string;
+  email?: string; // Optional property
 }
 
-console.log(average(80, 90, 70));
-console.log(average(85, 90, 75, 95));
-console.log(average(60, 70, 80, 90, 100));
+function login(user: User): void {
+  console.log("Username:", user.username);
+  console.log("Password:", user.password);
+
+    console.log("Email:", user.email);
+  
+}
+
+const user1: User = {
+  username: "Nuur",
+  password: "123456",
+   email: "nuur@example.com"
+};
+
+const user2: User = {
+  username: "Ahmed",
+  password: "abcdef",
+
+};
+
+login(user1);
+login(user2);
