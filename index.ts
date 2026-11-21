@@ -1,48 +1,61 @@
-//1- Typed Arrays
-// Array of strings
-let names: string[] = ["Ahmed", "Ali", "Mohamed"];
+//Add Types to a Function
+//Original JavaScript
+// function fullName(first, last) {
+//   return first + " " + last;
+// }
 
-// Array of numbers
-let grades: number[] = [85, 90, 75, 95];
+// TypeScript Version
+function fullName(first: string, last: string): string {
+  return first + " " + last;
+}
+const name = fullName("nuur", "maxamud");
+console.log(name);
 
-// Array of booleans
-let status: boolean[] = [true, false, true];
-console.log(names);
-console.log(grades);
-console.log(status);
-// try pushing wrong types
-// let names: string[] = ["Ahmed", "Ali"];
+//2. Optional and Default Parameters
+function registerUser(
+  username: string,
+  isAdmin?: boolean
+): void {
+  console.log("Username:", username);
+  console.log("Admin:", isAdmin);
+}
 
-// names.push("Hassan"); // Correct
-// names.push(100);      // Error
-
-// let grades: number[] = [80, 90];
-
-// grades.push(95);      // Correct
-// grades.push("Good");  // Error
-
-// let status: boolean[] = [true, false];
-
-// status.push(true);    // Correct
-// status.push("Yes");   // Error
-
-//2. Convert JavaScript to TypeScript
-// let products = ["Phone", "Laptop", 99];
-
-//solution
+registerUser("Nuur");
 
 
-let products: string[] = ["Phone", "Laptop"];
+//Your requested function:
+function registerUser(
+  username: string,
+  isAdmin: boolean = false,
+  language: string = "en"
+): void {
 
-products.push("Tablet");  // Correct
-products.push("Desktop"); // Correct
+  console.log("Username:", username);
+  console.log("Admin:", isAdmin);
+  console.log("Language:", language);
 
-products.push(99);        // Error
-products.push(true);      // Error
-console.log(products );
-//3. Use Tuples for Fixed Values
-let location: [string, number, number];
+}
 
-location = ["Hargeisa", 9.5624, 44.0770];
+registerUser("Nuur");
+registerUser("Ahmed", true);
+registerUser("Ali", false, "so");
 
-console.log(location);
+
+
+//3. Create a Safe Rest Function
+
+function average(...scores: number[]): number {
+
+  if (scores.length === 0) {
+    return 0;
+  }
+
+  const total = scores.reduce((sum, score) => sum + score, 0);
+
+  return total / scores.length;
+
+}
+
+console.log(average(80, 90, 70));
+console.log(average(85, 90, 75, 95));
+console.log(average(60, 70, 80, 90, 100));
