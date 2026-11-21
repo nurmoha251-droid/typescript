@@ -1,72 +1,26 @@
-function echo<T>(input: T): T {
-  return input;
-}
-const result1 = echo<string>("Hello TypeScript");
-const result2 = echo<number>(100);
-const result3 = echo<string[]>(["Phone", "Laptop", "Tablet"]);
-const result4 = echo<{ name: string; age: number }>({
-  name: "Nuur",
-  age: 25
-});
-
-console.log(result1);
-console.log(result2);
-console.log(result3);
-console.log(result4);
-
-
-//2. Generic Interface
-interface ApiResult<T> {
-  status: string;
-  data: T;
+enum UserRole {
+  SuperAdmin = "superadmin",
+  Moderator = "moderator",
+  Viewer = "viewer"
 }
 
-const response1: ApiResult<string> = {
-  status: "success",
-  data: "Login successful"
-};
-
-console.log(response1);
-
-const response2: ApiResult<{ id: number; name: string }> = {
-  status: "success",
-  data: {
-    id: 101,
-    name: "Nuur"
-  }
-};
-
-console.log(response2.data.name);
-console.log(response2.data.id);
-
-
-//3. First Element Function
-function first<T>(items: T[]): T  | undefined{
-  return items[0];
+function canEdit(role: UserRole): boolean {
+  return role !== UserRole.Viewer;
 }
+console.log("superadmin:", canEdit(UserRole.SuperAdmin));
+console.log("moderator:", canEdit(UserRole.Moderator));
+console.log("viewer:", canEdit(UserRole.Viewer));
 
-const firstNumber = first([10, 20, 30, 40]);
 
-console.log(firstNumber);
+//2. Type Assertion with as
+// const button = document.querySelector("button");
+// button.disabled = true;
 
 
-const firstName = first(["Ahmed", "Ali", "Mohamed"]);
 
-console.log(firstName);
+const button = document.querySelector("button") as HTMLButtonElement | null;
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
+
+if (button) {
+  button.disabled = true;
 }
-
-const products: Product[] = [
-  { id: 1, name: "Laptop", price: 500 },
-  { id: 2, name: "Phone", price: 300 },
-  { id: 3, name: "Tablet", price: 200 }
-];
-
-const firstProduct = first(products);
-
-console.log(firstProduct.name);
-console.log(firstProduct.price);
