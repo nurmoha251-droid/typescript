@@ -1,48 +1,48 @@
+//1- Typed Arrays
+// Array of strings
+let names: string[] = ["Ahmed", "Ali", "Mohamed"];
 
-//1: Declare Variables with Explicit Types
-//Solution
-let productName: string = "Laptop";
-let price: number = 500;
-let discountAvailable: boolean = true;
+// Array of numbers
+let grades: number[] = [85, 90, 75, 95];
 
-//assigning wrong values
-//  productName = 123; 
-//  price = "500"; 
-//  discountAvailable = "true";
+// Array of booleans
+let status: boolean[] = [true, false, true];
+console.log(names);
+console.log(grades);
+console.log(status);
+// try pushing wrong types
+// let names: string[] = ["Ahmed", "Ali"];
 
- //Corrected version
- productName = "Desktop";
- price = 300;
- discountAvailable = false;
+// names.push("Hassan"); // Correct
+// names.push(100);      // Error
 
- //2: Convert JavaScript to TypeScript
-//  function getDiscount(price, discount) {
-//   return price - price * discount;
-// }
+// let grades: number[] = [80, 90];
 
-//TypeScript solution
-function getDiscount(price: number, discount: number): number {
-  return price - price * discount;
-}
-console.log(getDiscount(100, 0.2));
+// grades.push(95);      // Correct
+// grades.push("Good");  // Error
 
-// 3: Dangerous any
-// function printLength(x: any) {
-//   console.log(x.length);
-// }
+// let status: boolean[] = [true, false];
 
-// printLength("Hello");
-// printLength(123);
+// status.push(true);    // Correct
+// status.push("Yes");   // Error
 
-function printLength(x: unknown): void {
+//2. Convert JavaScript to TypeScript
+// let products = ["Phone", "Laptop", 99];
 
-  if (typeof x === "string" || Array.isArray(x)) {
-    console.log(x.length);
-  } else {
-    console.log("Error: Value has no length property");
-  }
+//solution
 
-}
 
-printLength("Hello");
-printLength(123);
+let products: string[] = ["Phone", "Laptop"];
+
+products.push("Tablet");  // Correct
+products.push("Desktop"); // Correct
+
+products.push(99);        // Error
+products.push(true);      // Error
+console.log(products );
+//3. Use Tuples for Fixed Values
+let location: [string, number, number];
+
+location = ["Hargeisa", 9.5624, 44.0770];
+
+console.log(location);
