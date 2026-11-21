@@ -1,49 +1,72 @@
-//1. Define and Use an Interface
+function echo<T>(input: T): T {
+  return input;
+}
+const result1 = echo<string>("Hello TypeScript");
+const result2 = echo<number>(100);
+const result3 = echo<string[]>(["Phone", "Laptop", "Tablet"]);
+const result4 = echo<{ name: string; age: number }>({
+  name: "Nuur",
+  age: 25
+});
 
-interface User {
-  username: string;
-  password: string;
+console.log(result1);
+console.log(result2);
+console.log(result3);
+console.log(result4);
+
+
+//2. Generic Interface
+interface ApiResult<T> {
+  status: string;
+  data: T;
 }
 
-function logins(user: User): void {
-  console.log("Username:", user.username);
-  console.log("Password:", user.password);
-}
-
-const user12: User = {
-  username: "cali",
-  password: "654321"
+const response1: ApiResult<string> = {
+  status: "success",
+  data: "Login successful"
 };
 
-logins(user12);
+console.log(response1);
 
-
-//2. Use Optional Properties
-interface User {
-  username: string;
-  password: string;
-  email?: string; // Optional property
-}
-
-function login(user: User): void {
-  console.log("Username:", user.username);
-  console.log("Password:", user.password);
-
-    console.log("Email:", user.email);
-  
-}
-
-const user1: User = {
-  username: "Nuur",
-  password: "123456",
-   email: "nuur@example.com"
+const response2: ApiResult<{ id: number; name: string }> = {
+  status: "success",
+  data: {
+    id: 101,
+    name: "Nuur"
+  }
 };
 
-const user2: User = {
-  username: "Ahmed",
-  password: "abcdef",
+console.log(response2.data.name);
+console.log(response2.data.id);
 
-};
 
-login(user1);
-login(user2);
+//3. First Element Function
+function first<T>(items: T[]): T  | undefined{
+  return items[0];
+}
+
+const firstNumber = first([10, 20, 30, 40]);
+
+console.log(firstNumber);
+
+
+const firstName = first(["Ahmed", "Ali", "Mohamed"]);
+
+console.log(firstName);
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+}
+
+const products: Product[] = [
+  { id: 1, name: "Laptop", price: 500 },
+  { id: 2, name: "Phone", price: 300 },
+  { id: 3, name: "Tablet", price: 200 }
+];
+
+const firstProduct = first(products);
+
+console.log(firstProduct.name);
+console.log(firstProduct.price);
